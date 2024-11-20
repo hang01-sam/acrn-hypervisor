@@ -7,12 +7,14 @@
 #include <types.h>
 #include <errno.h>
 #include <asm/io.h>
-#ifndef CONFIG_RISCV64
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 #include <asm/msr.h>
 #include <asm/cpuid.h>
 #include <asm/cpu_caps.h>
 #endif
+#if !defined CONFIG_AARCH64
 #include <asm/apicreg.h>
+#endif
 #include <softirq.h>
 #include <trace.h>
 #include <asm/irq.h>
@@ -64,8 +66,12 @@ static inline void update_physical_timer(struct per_cpu_timers *cpu_timer)
 		timer = container_of((&cpu_timer->timer_list)->next,
 			struct hv_timer, node);
 
+#ifdef CONFIG_AARCH64
+		reopen_timer(timer->timeout);
+#else
 		/* it is okay to program a expired time */
 		msr_write(MSR_IA32_TSC_DEADLINE, timer->timeout);
+#endif
 	}
 }
 #endif

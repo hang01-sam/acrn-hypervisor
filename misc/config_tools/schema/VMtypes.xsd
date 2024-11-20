@@ -131,6 +131,26 @@ The size is a subset of the VM's total memory size specified on the Basic tab.</
   </xs:all>
 </xs:complexType>
 
+<xs:complexType name="VGicOptionsType">
+  <xs:all>
+    <xs:element name="gicd_base" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>VGICD base addr.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="gicr_base" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>VGICR base addr.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="main_irq" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>VGIC maintenance irq.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+  </xs:all>
+</xs:complexType>
+
 <xs:complexType name="OSConfigurations">
   <xs:all>
     <xs:element name="kern_type" type="VMKernelType" default="KERNEL_BZIMAGE">
@@ -166,6 +186,16 @@ The size is a subset of the VM's total memory size specified on the Basic tab.</
         <xs:documentation>The entry address in host memory for the VM kernel.</xs:documentation>
       </xs:annotation>
     </xs:element>
+    <xs:element name="kern_size" type="KernSize" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>The size of the VM kernel.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="kern_dtb_addr" type="KernDtbAddr" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>The dtb address in host memory for the VM kernel.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
   </xs:all>
 </xs:complexType>
 
@@ -193,6 +223,7 @@ The size is a subset of the VM's total memory size specified on the Basic tab.</
     <xs:enumeration value="COM Port 2" />
     <xs:enumeration value="COM Port 3" />
     <xs:enumeration value="COM Port 4" />
+    <xs:enumeration value="COM Port 5" />
     <xs:enumeration value="PCI" >
       <xs:annotation acrn:views="" />
     </xs:enumeration>

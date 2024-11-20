@@ -23,6 +23,7 @@ union u_qword {
 #define ULONG_MAX	((uint64_t)(~0UL))	/* 0xFFFFFFFF */
 #define LONG_MAX	(ULONG_MAX >> 1U)	/* 0x7FFFFFFF */
 #define LONG_MIN	(~LONG_MAX)		/* 0x80000000 */
+#define INT_MAX		(0x7FFFFFFF)
 
 static inline bool is_space(char c)
 {

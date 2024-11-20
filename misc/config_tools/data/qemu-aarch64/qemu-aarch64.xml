@@ -1,0 +1,187 @@
+<acrn-config board="qemu-aarch64">
+  <BASE_BOARD_INFO>
+        </BASE_BOARD_INFO>
+  <PCI_DEVICE>
+        </PCI_DEVICE>
+  <PCI_VID_PID>
+        </PCI_VID_PID>
+  <PM_INFO>
+        </PM_INFO>
+  <DRHD_INFO>
+        #define DRHD_COUNT              1U
+
+        #define DRHD0_DEV_CNT           0x1U
+        #define DRHD0_SEGMENT           0x0U
+        #define DRHD0_FLAGS             0x1U
+        #define DRHD0_REG_BASE          0xFED90000UL
+        #define DRHD0_IGNORE            false
+        #define DRHD0_DEVSCOPE0_TYPE    0x3U
+        #define DRHD0_DEVSCOPE0_ID      0x0U
+        #define DRHD0_DEVSCOPE0_BUS     0xffU
+        #define DRHD0_DEVSCOPE0_PATH    0x0U
+
+        </DRHD_INFO>
+  <CPU_BRAND>
+        "ARMv8 Cortex-A57"
+        </CPU_BRAND>
+  <CX_INFO>
+        /* Cx data is not available */
+        </CX_INFO>
+  <PX_INFO>
+        /* Px data is not available */
+        </PX_INFO>
+  <DEBUG_OPTIONS>
+        <CONSOLE_LOGLEVEL>5</CONSOLE_LOGLEVEL>
+        </DEBUG_OPTIONS>
+  <IOMEM_INFO>
+        </IOMEM_INFO>
+  <MEM_INFO>
+        00000000-40000000 : Device
+        40000000-440000000 : System RAM
+        </MEM_INFO>
+  <TTYS_INFO>
+        seri:/dev/ttyS0 type:mmio base:0x09000000 irq:17
+        </TTYS_INFO>
+  <AVAILABLE_IRQ_INFO>
+        3, 5, 6, 7, 10, 11, 13, 14, 15
+        </AVAILABLE_IRQ_INFO>
+  <TOTAL_MEM_INFO>
+        16 GB
+        </TOTAL_MEM_INFO>
+  <CPU_PROCESSOR_INFO>
+        0, 1, 2, 3, 4, 5, 6, 7
+        </CPU_PROCESSOR_INFO>
+  <processors>
+    <model description="Armv8 Cortex-A57">
+      <family_id></family_id>
+      <model_id></model_id>
+      <core_type></core_type>
+      <native_model_id></native_model_id>
+    </model>
+    <die id="0">
+      <core id="0">
+        <hw_id>0x0</hw_id>
+        <thread id="0x0">
+          <cpu_id>0</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x0</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="1">
+        <hw_id>0x1</hw_id>
+        <thread id="0x1">
+          <cpu_id>1</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="2">
+        <hw_id>0x2</hw_id>
+        <thread id="0x2">
+          <cpu_id>2</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="3">
+        <hw_id>0x3</hw_id>
+        <thread id="0x3">
+          <cpu_id>3</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="4">
+        <hw_id>0x4</hw_id>
+        <thread id="0x4">
+          <cpu_id>4</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="5">
+        <hw_id>0x5</hw_id>
+        <thread id="0x5">
+          <cpu_id>5</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="6">
+        <hw_id>0x6</hw_id>
+        <thread id="0x6">
+          <cpu_id>6</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+      <core id="7">
+        <hw_id>0x7</hw_id>
+        <thread id="0x7">
+          <cpu_id>7</cpu_id>
+          <apic_id>0x0</apic_id>
+          <x2apic_id>0x0</x2apic_id>
+          <family_id>0x0</family_id>
+          <model_id>0x00</model_id>
+          <stepping_id>0x0</stepping_id>
+          <core_type></core_type>
+          <native_model_id></native_model_id>
+        </thread>
+      </core>
+    </die>
+  </processors>
+  <caches>
+  </caches>
+  <memory>
+    <range start="0x0000000040000000" end="0x000000043fffffff" size="17179869184"/>
+  </memory>
+  <devices>
+    <bus type="system">
+      <bus id="PNP0A08" type="pci" address="0x0">
+        <resource id="res0" type="bus_number" min="0x0" max="0xff" len="0x100"/>
+        <resource id="res2" type="io_port" min="0x0" max="0xcf7" len="0xcf8"/>
+        <resource id="res1" type="io_port" min="0xcf8" max="0xcf8" len="0x8"/>
+        <resource id="res3" type="io_port" min="0xd00" max="0xffff" len="0xf300"/>
+        <resource id="res4" type="memory" min="0xa0000" max="0xbffff" len="0x20000"/>
+        <resource id="res5" type="memory" min="0x80000000" max="0xafffffff" len="0x30000000"/>
+        <resource id="res6" type="memory" min="0xc0000000" max="0xfebfffff" len="0x3ec00000"/>
+        <resource id="res7" type="memory" min="0x180000000" max="0x97fffffff" len="0x800000000"/>
+      </bus>
+    </bus>
+  </devices>
+</acrn-config>

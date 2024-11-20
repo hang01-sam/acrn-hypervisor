@@ -94,6 +94,7 @@ ifeq (true, $(shell [ $(GCC_MAJOR) -gt 8 ] && echo true))
 CFLAGS += -fcf-protection=none
 endif
 
+CFLAGS += -DCONFIG_X86
 ASFLAGS += -m64 -nostdinc -nostdlib
 ifeq (y, $(CONFIG_MULTIBOOT2))
 ASFLAGS += -DCONFIG_MULTIBOOT2
@@ -122,6 +123,7 @@ ifeq (y, $(CONFIG_RELEASE))
 LDFLAGS += -s
 endif
 
+ARCH_ASFLAGS += -DCONFIG_X86
 ARCH_CFLAGS += -gdwarf-2
 ARCH_ASFLAGS += -gdwarf-2 -DASSEMBLER=1
 ARCH_ARFLAGS +=

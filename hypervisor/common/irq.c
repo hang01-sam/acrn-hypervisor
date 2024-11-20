@@ -132,12 +132,14 @@ int32_t request_irq(uint32_t req_irq, irq_action_t action_fn, void *priv_data,
 		pr_err("[%s] invalid irq num", __func__);
 		ret = -EINVAL;
 	} else {
+#ifndef CONFIG_AARCH64
 		if (!request_irq_arch(irq)) {
 			pr_err("[%s] failed to alloc vector for irq %u",
 				__func__, irq);
 			free_irq_num(irq);
 			ret = -EINVAL;
 		} else {
+#endif
 			desc = &irq_desc_array[irq];
 			if (desc->action == NULL) {
 				spinlock_irqsave_obtain(&desc->lock, &rflags);
@@ -151,7 +153,16 @@ int32_t request_irq(uint32_t req_irq, irq_action_t action_fn, void *priv_data,
 				pr_err("%s: request irq(%u) failed, already requested",
 				       __func__, irq);
 			}
+#ifndef CONFIG_AARCH64
 		}
+#else
+		if (!request_irq_arch(irq)) {
+			pr_err("[%s] failed to alloc vector for irq %u",
+			       __func__, irq);
+			free_irq_num(irq);
+			ret = -EINVAL;
+		}
+#endif
 	}
 
 	return ret;

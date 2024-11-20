@@ -536,6 +536,19 @@ enum acrn_cpufreq_policy_type {
 	CPUFREQ_POLICY_NOMINAL,
 };
 
+struct acrn_cpu_info {
+	uint64_t hwid;
+};
+
+struct acrn_mem_info{
+	/** The base address of the memory range. */
+	uint64_t baseaddr;
+	/** The length of the memory range. */
+	uint64_t length;
+	/** The type of memory region. */
+	uint32_t type;
+};
+
 struct acrn_cpufreq_limits {
 	/* Performance levels for HWP */
 	uint8_t guaranteed_hwp_lvl;

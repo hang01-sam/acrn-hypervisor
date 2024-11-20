@@ -9,7 +9,7 @@
 #include <asm/lib/bits.h>
 #include <asm/cpu.h>
 #include <asm/per_cpu.h>
-#ifndef CONFIG_RISCV64
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 #include <asm/lapic.h>
 #endif
 #include <schedule.h>

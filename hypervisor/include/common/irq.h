@@ -16,7 +16,13 @@
  * @brief public APIs for common IRQ handling
  */
 
-#define NR_IRQS			256U
+#if defined CONFIG_AARCH64
+#define ARCH_NR_IRQS    1024U
+#else
+#define ARCH_NR_IRQS    256U
+#endif
+
+#define NR_IRQS			ARCH_NR_IRQS
 #define IRQ_INVALID		0xffffffffU
 
 #define IRQ_ALLOC_BITMAP_SIZE	INT_DIV_ROUNDUP(NR_IRQS, 64U)

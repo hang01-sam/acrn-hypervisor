@@ -26,6 +26,7 @@
         <xs:element name="TPM_INFO" type="xs:string" />
         <xs:element name="CLOS_INFO" type="xs:string" />
         <xs:element name="IOMEM_INFO" type="xs:string" />
+        <xs:element name="MEM_INFO" type="xs:string" />
         <xs:element name="BLOCK_DEVICE_INFO" type="xs:string" />
         <xs:element name="TTYS_INFO" type="xs:string" />
         <xs:element name="AVAILABLE_IRQ_INFO" type="xs:string" />

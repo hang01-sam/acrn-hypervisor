@@ -42,6 +42,7 @@
     <xsl:apply-templates select="hv/DEBUG_OPTIONS" />
     <xsl:apply-templates select="hv/FEATURES" />
     <xsl:apply-templates select="hv/MEMORY" />
+    <xsl:apply-templates select="hv/GIC" />
     <xsl:apply-templates select="hv/CAPACITIES" />
     <xsl:apply-templates select="hv/MISC_CFG" />
     <xsl:apply-templates select="vm/os_config/kern_type" />
@@ -162,6 +163,40 @@
 
     <xsl:call-template name="integer-by-key">
       <xsl:with-param name="key" select="'STACK_SIZE'" />
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="GIC">
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICD_BASE'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICD_SIZE'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICR_BASE'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICR_SIZE'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICR_NUM'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GICC_BASE'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'MAIN_IRQ'" />
+    </xsl:call-template>
+
+    <xsl:call-template name="integer-by-key">
+      <xsl:with-param name="key" select="'GIC_REVISION'" />
     </xsl:call-template>
   </xsl:template>
 

@@ -11,14 +11,18 @@
 #include <asm/irq.h>
 #include <console.h>
 #include <asm/per_cpu.h>
+#if !defined CONFIG_AARCH64
 #include <asm/vmx.h>
-#ifndef CONFIG_RISCV64
+#endif
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 #include <asm/cpuid.h>
 #include <asm/ioapic.h>
 #include <asm/host_pm.h>
 #else
+#ifndef CONFIG_AARCH64
 #include <asm/lib/string.h>
 #include <asm/plicreg.h>
+#endif
 #endif
 #include <ptdev.h>
 #include <asm/guest/vm.h>
@@ -26,7 +30,9 @@
 #include <logmsg.h>
 #include <version.h>
 #include <shell.h>
+#ifndef CONFIG_AARCH64
 #include <asm/guest/vmcs.h>
+#endif
 
 #define TEMP_STR_SIZE		60U
 #define MAX_STR_SIZE		256U
@@ -865,7 +871,7 @@ static int32_t shell_list_vcpu(__unused int32_t argc, __unused char **argv)
 	return 0;
 }
 
-#ifndef CONFIG_RISCV64
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 #define DUMPREG_SP_SIZE	32
 /* the input 'data' must != NULL and indicate a vcpu structure pointer */
 static void dump_vcpu_reg(void *data)
@@ -1018,7 +1024,7 @@ out:
 }
 
 #else
-static int32_t shell_vcpu_dumpreg(int32_t argc, char **argv) { return 0; }
+static int32_t shell_vcpu_dumpreg(__unused int32_t argc, __unused char **argv) { return 0; }
 #endif
 
 static int32_t shell_dump_host_mem(int32_t argc, char **argv)
@@ -1051,6 +1057,7 @@ static int32_t shell_dump_host_mem(int32_t argc, char **argv)
 	return ret;
 }
 
+#if !defined CONFIG_AARCH64
 static void dump_guest_mem(void *data)
 {
 	uint64_t i, fault_addr;
@@ -1120,6 +1127,9 @@ static int32_t shell_dump_guest_mem(int32_t argc, char **argv)
 
 	return ret;
 }
+#else
+static int32_t shell_dump_guest_mem(__unused int32_t argc, __unused char **argv) { return 0; }
+#endif
 
 static int32_t shell_to_vm_console(int32_t argc, char **argv)
 {
@@ -1221,7 +1231,7 @@ static int32_t shell_show_cpu_int(__unused int32_t argc, __unused char **argv)
 	return 0;
 }
 
-#ifndef CONFIG_RISCV64
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 static void get_entry_info(const struct ptirq_remapping_info *entry, char *type,
 		uint32_t *irq, uint32_t *vector, uint64_t *dest, bool *lvl_tm,
 		uint32_t *pgsi, uint32_t *vgsi, union pci_bdf *bdf, union pci_bdf *vbdf)
@@ -1303,12 +1313,12 @@ static int32_t shell_loglevel(int32_t argc, char **argv)
 	return 0;
 }
 
-#ifdef CONFIG_RISCV64
+#if defined CONFIG_RISCV64 || defined CONFIG_AARCH64
 static int32_t shell_show_ptdev_info(__unused int32_t argc, __unused char **argv)
 {
 	return 0;
 }
-static int32_t shell_show_vioapic_info(int32_t argc, char **argv)
+static int32_t shell_show_vioapic_info(__unused int32_t argc, __unused char **argv)
 {
 	return 0;
 }
@@ -1316,10 +1326,10 @@ static int32_t shell_show_ioapic_info(__unused int32_t argc, __unused char **arg
 {
 	return 0;
 }
-static int32_t shell_cpuid(int32_t argc, char **argv) { return 0; }
+static int32_t shell_cpuid(__unused int32_t argc, __unused char **argv) { return 0; }
 static int32_t shell_reboot(__unused int32_t argc, __unused char **argv) { return 0; }
-static int32_t shell_rdmsr(int32_t argc, char **argv) { return 0; }
-static int32_t shell_wrmsr(int32_t argc, char **argv) { return 0; }
+static int32_t shell_rdmsr(__unused int32_t argc, __unused char **argv) { return 0; }
+static int32_t shell_wrmsr(__unused int32_t argc, __unused char **argv) { return 0; }
 #else
 static void get_ptdev_info(char *str_arg, size_t str_max)
 {

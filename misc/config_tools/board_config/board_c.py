@@ -456,6 +456,61 @@ def gen_known_caps_pci_devs(config):
                 if i == (bdf_list_len - 1):
                     print("};", file=config)
 
+def gen_cpuinfo_list(config):
+    allocation_dir = os.path.split(acrn_config_utilities.SCENARIO_INFO_FILE)[0] + "/configs/allocation.xml"
+    allocation_etree = lxml.etree.parse(allocation_dir)
+    cpu_list = board_cfg_lib.get_processor_info()
+    max_cpu_num = len(cpu_list)
+
+    print("\nstruct acrn_cpu_info cpuinfo_list[MAX_PCPU_NUM] = {", file=config)
+    for cpu_id in range(max_cpu_num):
+        cpu_node = get_node(f"//cpuinfo/CPU[@id='{cpu_id}']", allocation_etree)
+        if cpu_node != None:
+            hwid = get_node("./hw_id/text()", cpu_node)
+            print("\t{", file=config)
+            print(f"\t\t.hwid = {hwid},", file=config)
+            print("\t},", file=config)
+    print("};", file=config)
+
+MEM_TYPE_RAM = 1
+MEM_TYPE_RESERVED = 2
+MEM_TYPE_ACPI = 3
+MEM_TYPE_NVS = 4
+MEM_TYPE_DEV = 6
+MEM_TYPE_UNKNOWN = 0xff
+
+def gen_meminfo_list(config):
+    allocation_dir = os.path.split(acrn_config_utilities.SCENARIO_INFO_FILE)[0] + "/configs/allocation.xml"
+    allocation_etree = lxml.etree.parse(allocation_dir)
+    meminfo_lines = board_cfg_lib.get_info(acrn_config_utilities.BOARD_INFO_FILE, "<MEM_INFO>", "</MEM_INFO>")
+
+    if not meminfo_lines:
+        return
+
+    print("\nstruct acrn_mem_info meminfo_list[] = {", file=config)
+    for line in meminfo_lines:
+        start_addr = hex(int(line.split('-')[0], 16))
+        mem_range = hex(int(line.split('-')[1].split(':')[0], 16) - int(line.split('-')[0], 16))
+        if "System RAM" in line:
+            type = MEM_TYPE_RAM
+        elif "Reserved" in line:
+            type = MEM_TYPE_RESERVED
+        elif "Device" in line:
+            type = MEM_TYPE_DEV
+
+        print("\t{", file=config)
+        print("\t\t.baseaddr = {}U,".format(start_addr), file=config)
+        print("\t\t.length = {}U,".format(mem_range), file=config)
+        print(f"\t\t.type = {type},", file=config)
+        print("\t},", file=config)
+    print("\t{", file=config)
+    print("\t\t.baseaddr = 0x0,", file=config)
+    print("\t\t.length = 0x0,", file=config)
+    print("\t\t.type = 0x0", file=config)
+    print("\t},", file=config)
+    print("};", file=config)
+
+
 def gen_cpufreq_limits(config):
     allocation_dir = os.path.split(acrn_config_utilities.SCENARIO_INFO_FILE)[0] + "/configs/allocation.xml"
     allocation_etree = lxml.etree.parse(allocation_dir)
@@ -510,6 +565,10 @@ def generate_file(config):
 
     # gen known caps of pci dev info for platform
     gen_known_caps_pci_devs(config)
+
+    gen_cpuinfo_list(config)
+
+    gen_meminfo_list(config)
 
     gen_cpufreq_limits(config)
 

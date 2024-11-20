@@ -5,7 +5,9 @@
 
 #include <asm/guest/vm.h>
 #include <asm/irq.h>
+#ifndef CONFIG_AARCH64
 #include <asm/guest/instr_emul.h>
+#endif
 #include <errno.h>
 #include <logmsg.h>
 #include <sbuf.h>

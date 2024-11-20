@@ -250,6 +250,12 @@
     <xsl:if test="kern_entry_addr/text()">
       <xsl:value-of select="acrn:initializer('kernel_entry_addr', kern_entry_addr)" />
     </xsl:if>
+    <xsl:if test="kern_size/text()">
+      <xsl:value-of select="acrn:initializer('kernel_size', kern_size)" />
+    </xsl:if>
+    <xsl:if test="kern_dtb_addr/text()">
+      <xsl:value-of select="acrn:initializer('kernel_dtb_addr', kern_dtb_addr)" />
+    </xsl:if>
     <xsl:if test="normalize-space(bootargs)">
       <xsl:choose>
         <xsl:when test="acrn:is-service-vm(../load_order)">
@@ -271,6 +277,21 @@
       <xsl:text>},</xsl:text>
       <xsl:value-of select="$newline" />
     </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="vgic">
+    <xsl:value-of select="acrn:initializer('vgic', '{', true())" />
+    <xsl:if test="gicd_base/text()">
+      <xsl:value-of select="acrn:initializer('gicd_base', gicd_base)" />
+    </xsl:if>
+    <xsl:if test="gicr_base/text()">
+      <xsl:value-of select="acrn:initializer('gicr_base', gicr_base)" />
+    </xsl:if>
+    <xsl:if test="main_irq/text()">
+      <xsl:value-of select="acrn:initializer('main_irq', main_irq)" />
+    </xsl:if>
+    <xsl:text>},</xsl:text>
+    <xsl:value-of select="$newline" />
   </xsl:template>
 
   <xsl:template match="console_vuart">
@@ -295,6 +316,12 @@
 	<xsl:value-of select="acrn:initializer('type', 'VUART_LEGACY_PIO')" />
 	<xsl:value-of select="acrn:initializer('addr.port_base', '0x2E8U')" />
 	<xsl:value-of select="acrn:initializer('irq', '3U')" />
+      </xsl:when>
+      <xsl:when test="./text() = 'COM Port 5'">
+       <xsl:value-of select="acrn:initializer('type', 'VUART_PL011')" />
+       <xsl:value-of select="acrn:initializer('addr.base', '0x9000000U')" />
+       <xsl:value-of select="acrn:initializer('addr.size', '0x10000U')" />
+       <xsl:value-of select="acrn:initializer('irq', '33U')" />
       </xsl:when>
       <xsl:when test="./text() = 'PCI'">
 	<xsl:value-of select="acrn:initializer('type', 'VUART_PCI')" />

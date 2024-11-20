@@ -57,6 +57,20 @@
   <xs:union memberTypes="None HexFormat" />
 </xs:simpleType>
 
+<xs:simpleType name="KernSize">
+  <xs:annotation>
+    <xs:documentation>Either empty, or an Integer value in hexadecimal format.</xs:documentation>
+  </xs:annotation>
+  <xs:union memberTypes="None HexFormat" />
+</xs:simpleType>
+
+<xs:simpleType name="KernDtbAddr">
+  <xs:annotation>
+    <xs:documentation>Either empty, or an Integer value in hexadecimal format.</xs:documentation>
+  </xs:annotation>
+  <xs:union memberTypes="None HexFormat" />
+</xs:simpleType>
+
 <xs:simpleType name="MaxMsixTableNumType">
   <xs:annotation>
     <xs:documentation>Integer from 1 to 2048.</xs:documentation>
@@ -146,6 +160,24 @@ higher value (lower severity) are discarded.</xs:documentation>
     </xs:enumeration>
   </xs:restriction>
 </xs:simpleType>
+
+<xs:simpleType name="GICType">
+  <xs:annotation>
+    <xs:documentation>An Integer from 2 to 3 specifying the GIC revision:
+- ``2: GICv2``: gicv2
+- ``3: GICv3``: gicv3
+    </xs:documentation>
+  </xs:annotation>
+  <xs:restriction base="xs:string">
+    <xs:enumeration value="2">
+      <xs:annotation acrn:title="2: GICv2" />
+    </xs:enumeration>
+    <xs:enumeration value="3">
+      <xs:annotation acrn:title="3: GICv3" />
+    </xs:enumeration>
+  </xs:restriction>
+</xs:simpleType>
+
 
 <xs:simpleType name="policyType">
   <xs:annotation>

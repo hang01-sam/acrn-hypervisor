@@ -14,7 +14,7 @@
 #include <acrn_hv_defs.h>
 #include <asm/guest/vm.h>
 #include <console.h>
-#ifndef CONFIG_RISCV64
+#if !defined CONFIG_RISCV64 && !defined CONFIG_AARCH64
 #include <boot.h>
 #include <vuart.h>
 #else

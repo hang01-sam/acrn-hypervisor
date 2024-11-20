@@ -156,6 +156,51 @@ If your VM is not a security VM, leave this option unchecked. </xs:documentation
   </xs:all>
 </xs:complexType>
 
+<xs:complexType name="GicOptionsType">
+  <xs:all>
+    <xs:element name="GICD_BASE" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICD base addr.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GICD_SIZE" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICD size.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GICR_BASE" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICR base addr.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GICR_SIZE" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICR size.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GICR_NUM" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICR num.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GICC_BASE" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GICC base addr.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="MAIN_IRQ" type="HexFormat" minOccurs="0">
+      <xs:annotation acrn:views="">
+        <xs:documentation>GIC maintenance irq.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="GIC_REVISION" type="GICType" default="3">
+      <xs:annotation acrn:title="GIC revision info" acrn:views="advanced">
+        <xs:documentation>Select GIC revision.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+  </xs:all>
+</xs:complexType>
+
 <xs:complexType name="CapacitiesOptionsType">
   <xs:annotation>
     <xs:documentation>Capacity limits for static assigned data structure or maximum supported resource.</xs:documentation>
@@ -303,6 +348,10 @@ These settings can only be changed at build time.</xs:documentation>
       <xs:annotation acrn:title="Memory options" acrn:views="advanced">
       </xs:annotation>
     </xs:element>
+    <xs:element name="GIC" type="GicOptionsType">
+      <xs:annotation acrn:title="Gic options" acrn:views="advanced">
+      </xs:annotation>
+    </xs:element>
     <xs:element name="CAPACITIES" type="CapacitiesOptionsType">
       <xs:annotation acrn:title="Hypervisor capacities" acrn:views="advanced">
       </xs:annotation>
@@ -373,6 +422,10 @@ These settings can only be changed at build time.</xs:documentation>
     <xs:element name="own_pcpu" type="Boolean" default="n">
       <xs:annotation acrn:title="Exclusively owns physical CPUs" acrn:views="">
         <xs:documentation>Enable a VM exclusively owns the physical CPUs assigned to it.</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+    <xs:element name="vgic" type="VGicOptionsType">
+      <xs:annotation acrn:title="VGic options" acrn:views="advanced">
       </xs:annotation>
     </xs:element>
     <xs:element name="cpu_affinity" type="CPUAffinityConfigurations" minOccurs="0">

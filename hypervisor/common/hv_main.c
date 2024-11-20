@@ -6,7 +6,9 @@
 
 #include <asm/guest/vm.h>
 #include <asm/guest/vm_reset.h>
+#ifndef CONFIG_AARCH64
 #include <asm/guest/vmcs.h>
+#endif
 #include <asm/guest/vmexit.h>
 #include <asm/guest/virq.h>
 #include <schedule.h>
